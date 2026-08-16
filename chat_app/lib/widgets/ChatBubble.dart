@@ -1,13 +1,16 @@
+import 'package:chat_app/models/chat_msg_entities.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChatBuble extends StatelessWidget {
 
+  /// Taken from model class
+  final ChatMessageEntity entity;
+
   /// Constructor..
-  final String message;
   final Alignment alignment;
 
-  const ChatBuble({super.key, required this.message, required this.alignment});
+  const ChatBuble({super.key, required this.alignment, required this.entity});
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +27,15 @@ class ChatBuble extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('$message',
+            Text('${entity.text}',
               style: TextStyle(
                   color: Colors.black, fontSize: 20
               ),),
-            Image.asset('assets/sky.jpg', width: 200, height: 200),
+
+            if(entity.imageUrl != null)
+              Image.network(
+                '${entity.imageUrl}', width: 200, height: 200
+            ),
           ],
         ),
       ),

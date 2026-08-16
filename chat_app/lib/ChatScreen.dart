@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:chat_app/LoginPage.dart';
+import 'package:chat_app/models/chat_msg_entities.dart';
 import 'package:chat_app/widgets/ChatBubble.dart';
 import 'package:chat_app/widgets/InputMsg.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,7 +52,12 @@ class Chatscreen extends StatelessWidget {
                   alignment: index % 2 == 0
                       ? Alignment.centerLeft
                       : Alignment.centerRight,
-                  message: 'Hello');
+                  entity: ChatMessageEntity(
+                      text: 'Akhil',
+                      id: '1234',
+                      createdAt: DateTime.now().microsecondsSinceEpoch,
+                      author: Author(userName: 'Akhil')
+                  ));
             },
           ),
           ),
