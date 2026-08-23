@@ -17,6 +17,9 @@ class ChatBuble extends StatelessWidget {
     return Align(
       alignment: alignment,
       child: Container(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.5,
+        ),
         /// Abt the msg
         padding: EdgeInsets.all(24),
         margin: EdgeInsets.all(20),
@@ -32,7 +35,7 @@ class ChatBuble extends StatelessWidget {
                   color: Colors.black, fontSize: 20
               ),),
 
-            if(entity.imageUrl != null)
+            if(entity.imageUrl != null && entity.imageUrl!.isNotEmpty)
               Image.network(
                 '${entity.imageUrl}', width: 200, height: 200
             ),

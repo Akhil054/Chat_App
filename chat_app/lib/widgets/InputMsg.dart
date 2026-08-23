@@ -1,21 +1,39 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../models/chat_msg_entities.dart';
+
 class InputMsg extends StatelessWidget {
-  InputMsg({super.key});
+
+  /// Function created to send the message to the parent widget
+  final Function(ChatMessageEntity) onSend;
+
+  InputMsg({super.key, required this.onSend});
 
   final chatController = TextEditingController();
 
   void onSendBtnPressed(){
     print('Chat Message  - ${chatController.text}');
+
+    /// this child widget calling the function from parent widget & passing the new message to the parent widget
+    final newChatMsg = ChatMessageEntity(
+      text: chatController.text,
+      id: '244',
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      author: Author(userName: 'akhil'),
+    );
+
+    /// calling the function from parent widget & passing the new message to the parent widget
+    onSend(newChatMsg);
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55,
+      constraints: const BoxConstraints(minHeight: 55),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             IconButton(onPressed: () {}, icon: Icon(Icons.add, color: Colors.white,),),
 

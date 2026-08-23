@@ -55,6 +55,14 @@ class _ChatscreenState extends State<Chatscreen> {
     _loadInitialMessages();
   }
 
+  /// adding the new message to the list of messages
+  onMessageSend(chatMsg){
+    setState(() {
+      _messages.add(chatMsg);
+    });
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +94,7 @@ class _ChatscreenState extends State<Chatscreen> {
               itemCount: _messages.length,
               itemBuilder: (context, index){
               return ChatBuble(
-                  alignment: _messages[index].author.userName == 'Akhil'
+                  alignment: _messages[index].author.userName == 'akhil'
                       ? Alignment.centerRight
                       : Alignment.centerLeft,
                   entity: _messages[index]
@@ -95,7 +103,7 @@ class _ChatscreenState extends State<Chatscreen> {
           ),
           ),
           /// Imported the Imput Msg Widget
-          InputMsg(),
+          InputMsg(onSend: onMessageSend),
         ],
       )
     );
