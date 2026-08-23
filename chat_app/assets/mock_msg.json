@@ -1,0 +1,128 @@
+[
+  {
+    "author": {
+      "username": "janeDoe"
+    },
+    "createdAt": 1598438599000,
+    "id": "10001",
+    "text": "Hey! Good morning 😊 How are you doing today?",
+    "image": "https://picsum.photos/seed/chat1/500/300"
+  },
+  {
+    "author": {
+      "username": "johnSmith"
+    },
+    "createdAt": 1598438699000,
+    "id": "10002",
+    "text": "Good morning! I'm doing great. What about you?",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "janeDoe"
+    },
+    "createdAt": 1598438799000,
+    "id": "10003",
+    "text": "I'm doing pretty well too! Just finished my breakfast.",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "johnSmith"
+    },
+    "createdAt": 1598438899000,
+    "id": "10004",
+    "text": "Nice! What did you have for breakfast?",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "janeDoe"
+    },
+    "createdAt": 1598438999000,
+    "id": "10005",
+    "text": "I had some pancakes and coffee ☕🥞",
+    "image": "https://picsum.photos/seed/pancakes/500/300"
+  },
+  {
+    "author": {
+      "username": "johnSmith"
+    },
+    "createdAt": 1598439099000,
+    "id": "10006",
+    "text": "That sounds delicious! 😋",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "janeDoe"
+    },
+    "createdAt": 1598439199000,
+    "id": "10007",
+    "text": "Haha, it was! Are you working today?",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "johnSmith"
+    },
+    "createdAt": 1598439299000,
+    "id": "10008",
+    "text": "Yes, I have a meeting at 11 AM and then I'll work on the new project.",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "janeDoe"
+    },
+    "createdAt": 1598439399000,
+    "id": "10009",
+    "text": "Oh nice! What project are you working on?",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "johnSmith"
+    },
+    "createdAt": 1598439499000,
+    "id": "10010",
+    "text": "It's a new mobile chat application. I'm building the UI in Flutter.",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "janeDoe"
+    },
+    "createdAt": 1598439599000,
+    "id": "10011",
+    "text": "That's awesome! Flutter is really good for building chat apps.",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "johnSmith"
+    },
+    "createdAt": 1598439699000,
+    "id": "10012",
+    "text": "Exactly! I'm also working on the API integration.",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "janeDoe"
+    },
+    "createdAt": 1598439799000,
+    "id": "10013",
+    "text": "Sounds great. Let me know if you need any help.",
+    "image": ""
+  },
+  {
+    "author": {
+      "username": "johnSmith"
+    },
+    "createdAt": 1598439899000,
+    "id": "10014",
+    "text": "Sure! Thanks 😊",
+    "image": ""
+  }
+]

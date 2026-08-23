@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:chat_app/LoginPage.dart';
@@ -6,8 +7,9 @@ import 'package:chat_app/widgets/ChatBubble.dart';
 import 'package:chat_app/widgets/InputMsg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class Chatscreen extends StatelessWidget {
+class Chatscreen extends StatefulWidget {
 
   /// Function created to logout & navigate to login screen again
   // void logOut(context){
@@ -17,7 +19,42 @@ class Chatscreen extends StatelessWidget {
   /// passing the variable with navigation
   // final String username;
 
-  const Chatscreen({Key ? key, }) : super(key: key);
+  Chatscreen({Key ? key, }) : super(key: key);
+
+  @override
+  State<Chatscreen> createState() => _ChatscreenState();
+}
+
+class _ChatscreenState extends State<Chatscreen> {
+
+  /// intial state of messages
+  List<ChatMessageEntity> _messages = [];
+
+  // created the method for loading the messages from the mock data
+  _loadInitialMessages() async {
+
+    final response  = await rootBundle.loadString('assets/mock_msg.json');
+
+    ///decoding the json data in form of List & if data is direct then it decoded in hashmap format
+    final List<dynamic> decodedList = jsonDecode(response) as List;
+
+    /// converting the response to a list of ChatMessageEntity
+    final List<ChatMessageEntity> messages = decodedList.map((listItems){
+       return ChatMessageEntity.fromJson(listItems);
+    }).toList();
+
+    /// final state of messages
+    setState(() {
+      _messages = messages;
+    });
+  }
+
+  ///calling it on inital & setting the new state of class
+  @override
+  void initState() {
+    _loadInitialMessages();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +83,14 @@ class Chatscreen extends StatelessWidget {
           /// making it dynamic by using ListView.builder
           Expanded(
             child: ListView.builder(
-              itemCount: 10,
+              itemCount: _messages.length,
               itemBuilder: (context, index){
               return ChatBuble(
-                  alignment: index % 2 == 0
-                      ? Alignment.centerLeft
-                      : Alignment.centerRight,
-                  entity: ChatMessageEntity(
-                      text: 'Akhil',
-                      id: '1234',
-                      createdAt: DateTime.now().microsecondsSinceEpoch,
-                      author: Author(userName: 'Akhil')
-                  ));
+                  alignment: _messages[index].author.userName == 'Akhil'
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  entity: _messages[index]
+              );
             },
           ),
           ),
