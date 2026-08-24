@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:chat_app/LoginPage.dart';
 import 'package:chat_app/models/chat_msg_entities.dart';
 import 'package:chat_app/models/image_model.dart';
+import 'package:chat_app/repository/img_repo.dart';
 import 'package:chat_app/widgets/ChatBubble.dart';
 import 'package:chat_app/widgets/InputMsg.dart';
 import 'package:flutter/cupertino.dart';
@@ -72,11 +73,13 @@ class _ChatscreenState extends State<Chatscreen> {
     });
   }
 
+  /// Created the obj of Image Repo
+  final ImageRepository _imgRepo = ImageRepository();
+  
   ///calling it on inital & setting the new state of class
   @override
   void initState() {
     _loadInitialMessages();
-    _getNetworkImages();
   }
 
   /// adding the new message to the list of messages
@@ -87,36 +90,10 @@ class _ChatscreenState extends State<Chatscreen> {
   }
 
 
-  /// Working with api --
-  Future<List<ImageModel>> _getNetworkImages() async {
-    var endpointUrl = Uri.parse('https://pixelford.com/api2/images');
-
-    /// getting response string & convert to dart obj
-    final response = await http.get(endpointUrl);
-
-    /// better with error handling
-    if(response.statusCode == 200){
-
-      /// decoding the list of dynamics & converting to list
-      final List<dynamic> decodedList = jsonDecode(response.body) as List;
-
-      /// converting the response to a list of Image
-      final List<ImageModel> _imglist = decodedList.map((listItems){
-        return ImageModel.fromJson(listItems);
-      }).toList();
-
-      print(_imglist[0].urlFullSize);
-      return _imglist;
-    }
-    else{
-      throw Exception('API not successfull');
-    }
-  }
 
 
   @override
   Widget build(BuildContext context) {
-    _getNetworkImages();
 
     /// using ModalRoute for routes
     final username = ModalRoute.of(context)?.settings.arguments as String? ?? 'Guest';
@@ -140,7 +117,7 @@ class _ChatscreenState extends State<Chatscreen> {
       body:Column(
         children: [
           FutureBuilder<List<ImageModel>>(
-              future: _getNetworkImages(), builder: (BuildContext context, AsyncSnapshot<List<ImageModel>> snapshot){
+              future: _imgRepo.getNetworkImages(), builder: (BuildContext context, AsyncSnapshot<List<ImageModel>> snapshot){
                 if(snapshot.hasData) return Image.network(snapshot.data![0].urlSmallSize);
 
                 return CircularProgressIndicator();
