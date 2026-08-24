@@ -88,7 +88,7 @@ class _ChatscreenState extends State<Chatscreen> {
 
 
   /// Working with api --
-  _getNetworkImages() async {
+  Future<List<ImageModel>> _getNetworkImages() async {
     var endpointUrl = Uri.parse('https://pixelford.com/api2/images');
 
     /// getting response string & convert to dart obj
@@ -106,6 +106,10 @@ class _ChatscreenState extends State<Chatscreen> {
       }).toList();
 
       print(_imglist[0].urlFullSize);
+      return _imglist;
+    }
+    else{
+      throw Exception('API not successfull');
     }
   }
 
@@ -135,6 +139,13 @@ class _ChatscreenState extends State<Chatscreen> {
 
       body:Column(
         children: [
+          FutureBuilder<List<ImageModel>>(
+              future: _getNetworkImages(), builder: (BuildContext context, AsyncSnapshot<List<ImageModel>> snapshot){
+                if(snapshot.hasData) return Image.network(snapshot.data![0].urlSmallSize);
+
+                return CircularProgressIndicator();
+          }),
+
           /// making it dynamic by using ListView.builder
           Expanded(
             child: ListView.builder(
