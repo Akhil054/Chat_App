@@ -74,8 +74,7 @@ class _ChatscreenState extends State<Chatscreen> {
   }
 
   /// Created the obj of Image Repo
-  final ImageRepository _imgRepo = ImageRepository();
-  
+
   ///calling it on inital & setting the new state of class
   @override
   void initState() {
@@ -116,12 +115,7 @@ class _ChatscreenState extends State<Chatscreen> {
 
       body:Column(
         children: [
-          FutureBuilder<List<ImageModel>>(
-              future: _imgRepo.getNetworkImages(), builder: (BuildContext context, AsyncSnapshot<List<ImageModel>> snapshot){
-                if(snapshot.hasData) return Image.network(snapshot.data![0].urlSmallSize);
 
-                return CircularProgressIndicator();
-          }),
 
           /// making it dynamic by using ListView.builder
           Expanded(

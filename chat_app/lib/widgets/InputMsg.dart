@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/chat_msg_entities.dart';
+import 'image_picker_body.dart';
 
 class InputMsg extends StatelessWidget {
 
@@ -35,7 +36,15 @@ class InputMsg extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.add, color: Colors.white,),),
+            IconButton(
+              onPressed: () {
+                showBottomSheet(context: context, builder: (BuildContext context){
+                  return ImagePickerBody();
+                });
+              },
+              icon: Icon(Icons.add, color: Colors.white,),
+            ),
+
 
             Expanded(
                 child: TextField(
