@@ -6,11 +6,10 @@ import '../models/image_model.dart';
 
 class ImagePickerBody extends StatelessWidget {
 
-
+  final Function(String) onImageSelected;
   final ImageRepository _imgRepo = ImageRepository();
 
-
-  ImagePickerBody({super.key,});
+  ImagePickerBody({super.key, required this.onImageSelected,});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,12 @@ class ImagePickerBody extends StatelessWidget {
         return GridView.builder(
           itemCount: snapshot.data!.length,
           itemBuilder: (context, index){
-          return Image.network(snapshot.data![index].urlSmallSize);
+          return GestureDetector(
+            onTap: () {
+              ///fetching the image & showing on screen
+              onImageSelected(snapshot.data![index].urlSmallSize);
+            },
+              child: Image.network(snapshot.data![index].urlSmallSize));
         },
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               crossAxisSpacing: 2,

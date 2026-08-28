@@ -4,14 +4,21 @@ import 'package:flutter/material.dart';
 import '../models/chat_msg_entities.dart';
 import 'image_picker_body.dart';
 
-class InputMsg extends StatelessWidget {
+class InputMsg extends StatefulWidget {
 
   /// Function created to send the message to the parent widget
   final Function(ChatMessageEntity) onSend;
 
   InputMsg({super.key, required this.onSend});
 
+  @override
+  State<InputMsg> createState() => _InputMsgState();
+}
+
+class _InputMsgState extends State<InputMsg> {
   final chatController = TextEditingController();
+
+  String _selectedImageUrl = '';
 
   void onSendBtnPressed(){
     print('Chat Message  - ${chatController.text}');
@@ -24,8 +31,26 @@ class InputMsg extends StatelessWidget {
       author: Author(userName: 'akhil'),
     );
 
+    /// passing up the image in chatmessages
+    if(_selectedImageUrl.isNotEmpty){
+      newChatMsg.imageUrl = _selectedImageUrl;
+    }
     /// calling the function from parent widget & passing the new message to the parent widget
-    onSend(newChatMsg);
+    widget.onSend(newChatMsg);
+
+    /// done so to clear the images & message written in chatInput
+    chatController.clear();
+    _selectedImageUrl = '';
+    setState(() {});
+  }
+
+  void onImagePicked(String newImageUrl)
+  {
+    setState(() {
+      _selectedImageUrl = newImageUrl;
+
+    });
+    Navigator.of(context).pop();
   }
 
   @override
@@ -39,7 +64,8 @@ class InputMsg extends StatelessWidget {
             IconButton(
               onPressed: () {
                 showBottomSheet(context: context, builder: (BuildContext context){
-                  return ImagePickerBody();
+                  return ImagePickerBody(
+                    onImageSelected: onImagePicked,);
                 });
               },
               icon: Icon(Icons.add, color: Colors.white,),
@@ -47,24 +73,32 @@ class InputMsg extends StatelessWidget {
 
 
             Expanded(
-                child: TextField(
-                  /// Taking the input for nextLine..
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 5,
-                  minLines: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextField(
+                      /// Taking the input for nextLine..
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 5,
+                      minLines: 1,
 
-                  /// added controller
-                  controller: chatController,
+                      /// added controller
+                      controller: chatController,
 
-                  /// Text Captilisation
-                  textCapitalization: TextCapitalization.sentences,
+                      /// Text Captilisation
+                      textCapitalization: TextCapitalization.sentences,
 
 
-                  decoration: InputDecoration(
-                    hintText: 'Type ur msg',
-                    hintStyle: TextStyle(color: Colors.black),
-                    border: InputBorder.none
-                  ),
+                      decoration: InputDecoration(
+                        hintText: 'Type ur msg',
+                        hintStyle: TextStyle(color: Colors.black),
+                        border: InputBorder.none
+                      ),
+                    ),
+                    /// created the widget
+                    if(_selectedImageUrl.isNotEmpty)
+                      Image.network(_selectedImageUrl, height: 80,),
+                  ],
                 )
             ),
 
