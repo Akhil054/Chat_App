@@ -98,6 +98,7 @@ class _ChatscreenState extends State<Chatscreen> {
     final username = ModalRoute.of(context)?.settings.arguments as String? ?? 'Guest';
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,

@@ -12,7 +12,9 @@ class ChatApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
      return  MaterialApp(
-       theme: ThemeData(primarySwatch: Colors.deepPurple,
+       theme: ThemeData(
+         canvasColor: Colors.transparent,
+           primarySwatch: Colors.deepPurple,
        appBarTheme: AppBarTheme(backgroundColor: Colors.deepPurpleAccent, foregroundColor: Colors.black,)
        ),
        debugShowCheckedModeBanner: false,

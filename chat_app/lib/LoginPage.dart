@@ -36,11 +36,11 @@ class LoginPage extends StatelessWidget {
   /// Object of Text Editing Controller..
   final userNameController = TextEditingController();
   final userPassController = TextEditingController();
-  final _mainUrl = 'https://www.linkedin.com/in/akhil-tamgaonkar-100096192/';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           /// added padding that assign to button too
@@ -66,6 +66,14 @@ class LoginPage extends StatelessWidget {
                 key: _formKey,
                 child: Column(
                   children: [
+                    Container(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,    ///taken the space available
+                      decoration: BoxDecoration(
+                        image: DecorationImage(image: AssetImage('assets/LoginPage.jpg')),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
 
                     /// Taking the Text Input
                     LoginTextfield(
@@ -108,16 +116,12 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),)
               ),
 
+              const SizedBox(height: 20),
+
               GestureDetector(
-                onTap: () async {
-                  if(!await launch(_mainUrl)){
-                    throw 'Could not launch this';
-                  }
-                },
                 child: Column(
                   children: [
                     Text('Find me on',style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),),
-                    Text(_mainUrl),
                   ],
                 ),
               ),
@@ -125,15 +129,13 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
 
-                  SocialMediaButton.google(
+                  SocialMediaButton.linkedin(
                     onTap: () async {
-                      if(!await launch('https://Google.com',)){
+                      if(!await launch('https://www.linkedin.com/in/akhil-tamgaonkar-100096192/',)){
                         throw 'Could not launch this';
                       }
                     },
-                  ),
-
-                  SocialMediaButton.linkedin(url: 'https://www.linkedin.com/in/akhil-tamgaonkar-100096192/',),
+                  )
                 ]
               )
             ]

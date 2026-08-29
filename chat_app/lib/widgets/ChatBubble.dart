@@ -14,19 +14,23 @@ class ChatBuble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isAuthor = entity.author.userName == 'akhil';
     return Align(
       alignment: alignment,
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.5,
+          maxWidth: MediaQuery.of(context).size.width * 0.6,
         ),
+
         /// Abt the msg
         padding: EdgeInsets.all(24),
         margin: EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.lightBlue[100],
+          // color: Colors.lightBlue[100],
+          color: isAuthor ? Theme.of(context).primaryColor : Colors.blueGrey,
           borderRadius: BorderRadius.circular(12),
         ),
+
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -34,11 +38,15 @@ class ChatBuble extends StatelessWidget {
               style: TextStyle(
                   color: Colors.black, fontSize: 20
               ),),
-
             if(entity.imageUrl != null && entity.imageUrl!.isNotEmpty)
-              Image.network(
-                '${entity.imageUrl}', width: 200, height: 200
-            ),
+              Container(
+                height: 200,
+                width: MediaQuery.of(context).size.width,    ///taken the space available
+                decoration: BoxDecoration(
+                  image: DecorationImage(image: NetworkImage(entity.imageUrl!)),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
           ],
         ),
       ),
