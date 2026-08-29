@@ -33,6 +33,12 @@ class ImagePickerBody extends StatelessWidget {
             ),
         );
       }
+      else if(snapshot.hasError){
+        return Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Text('This is the error : ${snapshot.error}'),
+        );
+      }
 
       return Padding(
         padding: const EdgeInsets.all(8.0),
