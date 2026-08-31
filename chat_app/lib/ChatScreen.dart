@@ -4,6 +4,7 @@ import 'package:chat_app/LoginPage.dart';
 import 'package:chat_app/models/chat_msg_entities.dart';
 import 'package:chat_app/models/image_model.dart';
 import 'package:chat_app/repository/img_repo.dart';
+import 'package:chat_app/services/auth_services.dart';
 import 'package:chat_app/widgets/ChatBubble.dart';
 import 'package:chat_app/widgets/InputMsg.dart';
 import 'package:flutter/cupertino.dart';
@@ -124,7 +125,7 @@ class _ChatscreenState extends State<Chatscreen> {
               itemCount: _messages.length,
               itemBuilder: (context, index){
               return ChatBuble(
-                  alignment: _messages[index].author.userName == 'akhil'
+                  alignment: _messages[index].author.userName == AuthServices().getUserName()
                       ? Alignment.centerRight
                       : Alignment.centerLeft,
                   entity: _messages[index]

@@ -14,7 +14,7 @@ class ChatBuble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isAuthor = entity.author.userName == 'akhil';
+    bool isAuthor = entity.author.userName == AuthServices().getUserName();
     return Align(
       alignment: alignment,
       child: Container(
