@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class Chatscreen extends StatefulWidget {
 
@@ -125,7 +126,8 @@ class _ChatscreenState extends State<Chatscreen> {
               itemCount: _messages.length,
               itemBuilder: (context, index){
               return ChatBuble(
-                  alignment: _messages[index].author.userName == AuthServices().getUserName()
+                /// getting the data from provider class
+                  alignment: _messages[index].author.userName == context.read<AuthServices>().getUserName()
                       ? Alignment.centerRight
                       : Alignment.centerLeft,
                   entity: _messages[index]

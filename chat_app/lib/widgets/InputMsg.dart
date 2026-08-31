@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../models/chat_msg_entities.dart';
+import '../services/auth_services.dart';
 import 'image_picker_body.dart';
 
 class InputMsg extends StatefulWidget {
@@ -28,7 +29,7 @@ class _InputMsgState extends State<InputMsg> {
       text: chatController.text,
       id: '244',
       createdAt: DateTime.now().millisecondsSinceEpoch,
-      author: Author(userName: 'akhil'),
+      author: Author(userName: context.read<AuthServices>().getUserName()),
     );
 
     /// passing up the image in chatmessages

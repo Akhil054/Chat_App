@@ -1,6 +1,9 @@
 import 'package:chat_app/models/chat_msg_entities.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import '../services/auth_services.dart';
+import 'package:provider/provider.dart';
 
 class ChatBuble extends StatelessWidget {
 
@@ -14,7 +17,7 @@ class ChatBuble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isAuthor = entity.author.userName == AuthServices().getUserName();
+    bool isAuthor = entity.author.userName == context.read<AuthServices>().getUserName();
     return Align(
       alignment: alignment,
       child: Container(

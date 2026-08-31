@@ -1,11 +1,13 @@
 import 'package:chat_app/ChatScreen.dart';
+import 'package:chat_app/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/LoginPage.dart';
 import 'package:chat_app/counter_stateful_Demo.dart';
+import 'package:provider/provider.dart';
 
 
 void main() {
-  runApp(ChatApp());
+  runApp(Provider(create:(BuildContext context) => AuthServices(), child:ChatApp(), ));
 }
 
 class ChatApp extends StatelessWidget{
