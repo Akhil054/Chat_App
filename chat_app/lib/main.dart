@@ -12,7 +12,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AuthServices.init();
 
-  runApp(Provider(create:(BuildContext context) => AuthServices(), child:ChatApp(), ));
+  runApp(ChangeNotifierProvider(
+    create:(BuildContext context) => AuthServices(),
+    child:ChatApp(),
+  ));
 }
 
 class ChatApp extends StatelessWidget{

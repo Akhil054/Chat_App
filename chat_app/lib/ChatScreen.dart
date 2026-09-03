@@ -97,7 +97,9 @@ class _ChatscreenState extends State<Chatscreen> {
   Widget build(BuildContext context) {
 
     /// using ModalRoute for routes
-    final username = ModalRoute.of(context)?.settings.arguments as String? ?? 'Guest';
+    // final username = ModalRoute.of(context)?.settings.arguments as String? ?? 'Guest';
+    final username = context.watch<AuthServices>().getUserName();
+
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -108,6 +110,12 @@ class _ChatscreenState extends State<Chatscreen> {
         /// passing the name var..
         title:Text('Hii ${username}'),
         actions: [
+          IconButton(onPressed: () {
+          context.read()<AuthServices>().updateUserName("New Name");
+          },
+              icon: Icon(Icons.logout_outlined)),
+
+
           IconButton(onPressed: () {
             context.read()<AuthServices>().logoutUser();
             ///used for pushReplacementRoutes

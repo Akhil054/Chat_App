@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthServices {
+class AuthServices extends ChangeNotifier{
 
 
   /// initlise so to remove the repeated async calls
@@ -31,6 +32,12 @@ class AuthServices {
   String?  getUserName() {
     // SharedPreferences sprefs = await _prefs;  ///storing the curr instance
     return _prefs.getString('userName') ?? 'DefaultValue';
+  }
 
+  /// demo of change notifier to update the username in shared preferences & notify the listeners
+  void updateUserName(String newName)
+  {
+    _prefs.setString('newName', newName);
+    notifyListeners();
   }
 }
