@@ -6,7 +6,12 @@ import 'package:chat_app/counter_stateful_Demo.dart';
 import 'package:provider/provider.dart';
 
 
-void main() {
+void main() async {
+
+  /// initlise mthd is called & awaited to ensure sp is ready befire app start
+  WidgetsFlutterBinding.ensureInitialized();
+  await AuthServices.init();
+
   runApp(Provider(create:(BuildContext context) => AuthServices(), child:ChatApp(), ));
 }
 

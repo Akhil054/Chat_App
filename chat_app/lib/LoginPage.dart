@@ -115,8 +115,8 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 20),
 
               ElevatedButton(
-                  onPressed: () aysnc {
-                    await loginUser(context);
+                  onPressed: ()  {
+                    loginUser(context);
                   },
                   child: Text('Log In! ',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),)
