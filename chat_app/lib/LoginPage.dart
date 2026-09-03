@@ -1,20 +1,23 @@
 import 'dart:math';
 
 import 'package:chat_app/ChatScreen.dart';
+import 'package:chat_app/services/auth_services.dart';
 import 'package:chat_app/utils/BrandColors.dart';
 import 'package:chat_app/utils/textfield_Styles.dart';
 import 'package:chat_app/widgets/login_Textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:social_media_buttons/social_media_button.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
   final _formKey = GlobalKey<FormState>();
 
-  void loginUser(context){
+  Future<void> loginUser(BuildContext context) async {
 
     if(_formKey.currentState!=null && _formKey.currentState!.validate()){
       
@@ -25,6 +28,9 @@ class LoginPage extends StatelessWidget {
     else {
       print('Not successfull');
     }
+
+    ///calling the sharedPreferences
+    await context.read<AuthServices>().loginUser(userNameController.text);
 
     /// Navigation
     /// Not added the screen stack i.e takes new routes & replaces with current route..
@@ -109,8 +115,8 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 20),
 
               ElevatedButton(
-                  onPressed: (){
-                    loginUser(context);
+                  onPressed: () aysnc {
+                    await loginUser(context);
                   },
                   child: Text('Log In! ',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),)

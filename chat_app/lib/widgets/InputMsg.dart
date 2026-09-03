@@ -21,7 +21,8 @@ class _InputMsgState extends State<InputMsg> {
 
   String _selectedImageUrl = '';
 
-  void onSendBtnPressed(){
+  void onSendBtnPressed() async {
+    String? userNameFromCache = await context.read<AuthServices>().getUserName();
     print('Chat Message  - ${chatController.text}');
 
     /// this child widget calling the function from parent widget & passing the new message to the parent widget
@@ -29,8 +30,7 @@ class _InputMsgState extends State<InputMsg> {
       text: chatController.text,
       id: '244',
       createdAt: DateTime.now().millisecondsSinceEpoch,
-      author: Author(userName: context.read<AuthServices>().getUserName()),
-    );
+      author: Author(userName: userNameFromCache!));
 
     /// passing up the image in chatmessages
     if(_selectedImageUrl.isNotEmpty){

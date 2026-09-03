@@ -109,6 +109,7 @@ class _ChatscreenState extends State<Chatscreen> {
         title:Text('Hii ${username}'),
         actions: [
           IconButton(onPressed: () {
+            context.read()<AuthServices>().logoutUser();
             ///used for pushReplacementRoutes
             Navigator.pushReplacementNamed(context, '/');
           },
