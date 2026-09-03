@@ -30,7 +30,17 @@ class ChatApp extends StatelessWidget{
        debugShowCheckedModeBanner: false,
        title: "Flutter Chat App",
       // home: CounterStateful(buttonColor: Colors.blue),
-       home: LoginPage(),
+       home: FutureBuilder<bool>(
+           future: context.read<AuthServices>().isLoggedIn(),
+         builder: (context, AsyncSnapshot<bool> snapshot) {
+             if(snapshot.connectionState == ConnectionState.done){
+               if(snapshot.hasData && snapshot.data!){
+                 return Chatscreen();
+              }
+               else return LoginPage();
+             }
+           return CircularProgressIndicator();
+         }),
 
        /// routes
        routes: {
